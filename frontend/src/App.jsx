@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import RaiseComplaint from './pages/RaiseComplaint';
-import Welcome from './pages/Welcome';
+
 import './App.css';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<Welcome />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/raise-complaint" element={<RaiseComplaint />} />
 
         {/* Owner/Admin Routes - With Sidebar */}

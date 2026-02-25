@@ -85,48 +85,22 @@ const RaiseComplaint = () => {
                 </div>
             )}
 
-            <div className={`complaint-page ${!showSplash ? 'form-reveal' : ''}`} style={{ visibility: showSplash ? 'hidden' : 'visible' }}>
-                {/* Premium Background Elements */}
-                <div className="floating-element" style={{ width: '600px', height: '600px', top: '-15%', right: '-10%', animationDelay: '0s' }}></div>
-                <div className="floating-element" style={{ width: '400px', height: '400px', bottom: '0%', left: '-5%', animationDelay: '-5s', background: 'rgba(59, 130, 246, 0.08)' }}></div>
-
+            <div className={`complaint-container ${!showSplash ? 'form-reveal' : ''}`} style={{ visibility: showSplash ? 'hidden' : 'visible' }}>
                 <div className="complaint-card">
                     <header>
-                        <h1>Karthik Electrical</h1>
-                        <div className="subtitle">Electrical Service & Repair</div>
+                        <h1>Welcome To Karthik Electricals</h1>
+                        <div className="subtitle">We are happy to assist you kindly fill the details below to continue</div>
                     </header>
 
                     {status === 'success' && (
-                        <div style={{
-                            padding: '10px 14px',
-                            borderRadius: '6px',
-                            backgroundColor: '#f0fdf4',
-                            border: '1px solid #bbf7d0',
-                            color: '#166534',
-                            marginBottom: '18px',
-                            fontSize: '13px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px'
-                        }}>
+                        <div className="status-toast success">
                             <CheckCircle size={16} />
                             <span>Request submitted successfully!</span>
                         </div>
                     )}
 
                     {status === 'error' && (
-                        <div style={{
-                            padding: '10px 14px',
-                            borderRadius: '6px',
-                            backgroundColor: '#fef2f2',
-                            border: '1px solid #fee2e2',
-                            color: '#991b1b',
-                            marginBottom: '18px',
-                            fontSize: '13px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px'
-                        }}>
+                        <div className="status-toast error">
                             <AlertCircle size={16} />
                             <span>Error submitting request.</span>
                         </div>
@@ -139,7 +113,7 @@ const RaiseComplaint = () => {
                                 id="customer_name"
                                 type="text"
                                 name="customer_name"
-                                placeholder="e.g., John Doe"
+                                placeholder="e.g. John Doe"
                                 value={formData.customer_name}
                                 onChange={handleChange}
                                 required
@@ -200,34 +174,32 @@ const RaiseComplaint = () => {
                             />
                         </div>
 
-                        <div className="form-footer" style={{ marginTop: '32px' }}>
+                        <div className="form-footer">
                             {isLoggedIn ? (
-                                <button type="submit" className="btn-primary" disabled={loading} style={{ width: '100%', height: '56px', borderRadius: '16px' }}>
+                                <button type="submit" className="btn-primary" disabled={loading}>
                                     {loading ? 'Submitting...' : (
                                         <>
                                             <Send size={20} />
-                                            Submit Service Request
+                                            Submit Request
                                         </>
                                     )}
                                 </button>
                             ) : (
-                                <div className="btn-group" style={{ display: 'flex', gap: '16px' }}>
+                                <div className="btn-group">
                                     <button
                                         type="button"
                                         className="btn-secondary"
-                                        style={{ flex: 1, height: '56px', borderRadius: '16px' }}
                                         onClick={() => setAuthModal({ isOpen: true, mode: 'login' })}
                                     >
-                                        <LogIn size={20} />
+                                        <LogIn size={18} />
                                         LOGIN
                                     </button>
                                     <button
                                         type="button"
                                         className="btn-primary"
-                                        style={{ flex: 1, height: '56px', borderRadius: '16px' }}
                                         onClick={() => setAuthModal({ isOpen: true, mode: 'register' })}
                                     >
-                                        <UserPlus size={20} />
+                                        <UserPlus size={18} />
                                         REGISTER
                                     </button>
                                 </div>

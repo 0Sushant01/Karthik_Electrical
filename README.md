@@ -29,6 +29,7 @@ A full-stack internal record management system for Vishal Electric.
    ```
 4. Run migrations:
    ```bash
+   python manage.py makemigrations
    python manage.py migrate
    ```
 5. Start the development server:
