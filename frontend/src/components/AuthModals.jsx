@@ -33,7 +33,7 @@ const AuthModals = ({ isOpen, onClose, initialMode = 'login', onAuthSuccess }) =
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('http://localhost:8000/api/accounts/register/', {
+            const response = await fetch('http://13.127.83.204:8000/api/accounts/register/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -61,7 +61,7 @@ const AuthModals = ({ isOpen, onClose, initialMode = 'login', onAuthSuccess }) =
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('http://localhost:8000/api/accounts/verify-otp/', {
+            const response = await fetch('http://13.127.83.204:8000/api/accounts/verify-otp/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -90,7 +90,7 @@ const AuthModals = ({ isOpen, onClose, initialMode = 'login', onAuthSuccess }) =
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('http://localhost:8000/api/accounts/login/', {
+            const response = await fetch('http://13.127.83.204:8000/api/accounts/login/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

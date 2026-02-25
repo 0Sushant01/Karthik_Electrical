@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build:
+      context: ./backend
+    container_name: vishalelectric_backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - static_data:/app/static
+      - sqlite_data:/app
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: vishalelectric_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  static_data:
+  sqlite_data:
