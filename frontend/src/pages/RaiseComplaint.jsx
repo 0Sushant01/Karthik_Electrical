@@ -46,7 +46,6 @@ const RaiseComplaint = () => {
         const handleUnauthorized = () => {
             setIsLoggedIn(false);
             setFormData(prev => ({ ...prev, phone: '', customer_name: '' }));
-            setAuthModal({ isOpen: true, mode: 'login' });
         };
         window.addEventListener('unauthorized', handleUnauthorized);
 
@@ -144,77 +143,105 @@ const RaiseComplaint = () => {
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="customer_name">Full Name</label>
-                            <input
-                                id="customer_name"
-                                type="text"
-                                name="customer_name"
-                                placeholder="e.g. John Doe"
-                                value={formData.customer_name}
-                                onChange={handleChange}
-                                required
-                                disabled={isLoggedIn}
-                            />
+                    {!isLoggedIn ? (
+                        <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+                            <ShieldCheck size={48} style={{ color: 'var(--primary-color)', margin: '0 auto 1.5rem', opacity: 0.8 }} />
+                            <h2 style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>Authentication Required</h2>
+                            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: '1.5' }}>
+                                Please log in or create an account to raise and track your service requests.
+                            </p>
+                            <div className="btn-group" style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
+                                <button
+                                    type="button"
+                                    className="btn-primary"
+                                    onClick={() => setAuthModal({ isOpen: true, mode: 'login' })}
+                                    style={{ padding: '0.75rem 1.5rem' }}
+                                >
+                                    <LogIn size={18} />
+                                    LOGIN
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn-secondary"
+                                    onClick={() => setAuthModal({ isOpen: true, mode: 'register' })}
+                                    style={{ padding: '0.75rem 1.5rem' }}
+                                >
+                                    <UserPlus size={18} />
+                                    REGISTER
+                                </button>
+                            </div>
                         </div>
+                    ) : (
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="customer_name">Full Name</label>
+                                <input
+                                    id="customer_name"
+                                    type="text"
+                                    name="customer_name"
+                                    placeholder="e.g. John Doe"
+                                    value={formData.customer_name}
+                                    onChange={handleChange}
+                                    required
+                                    disabled={isLoggedIn}
+                                />
+                            </div>
 
-                        <div className="form-group">
-                            <label htmlFor="phone">Phone Number</label>
-                            <input
-                                id="phone"
-                                type="tel"
-                                name="phone"
-                                placeholder="Enter your contact number"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                required
-                                disabled={isLoggedIn}
-                            />
-                        </div>
+                            <div className="form-group">
+                                <label htmlFor="phone">Phone Number</label>
+                                <input
+                                    id="phone"
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="Enter your contact number"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    required
+                                    disabled={isLoggedIn}
+                                />
+                            </div>
 
-                        <div className="form-group">
-                            <label htmlFor="address">Service Address</label>
-                            <textarea
-                                id="address"
-                                name="address"
-                                placeholder="Address where service is needed"
-                                value={formData.address}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="form-group">
+                                <label htmlFor="address">Service Address</label>
+                                <textarea
+                                    id="address"
+                                    name="address"
+                                    placeholder="Address where service is needed"
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="form-group">
-                            <label htmlFor="issue_category">Issue Category</label>
-                            <select
-                                id="issue_category"
-                                name="issue_category"
-                                value={formData.issue_category}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="">-- Select Category --</option>
-                                {issueCategories.map(cat => (
-                                    <option key={cat} value={cat}>{cat}</option>
-                                ))}
-                            </select>
-                        </div>
+                            <div className="form-group">
+                                <label htmlFor="issue_category">Issue Category</label>
+                                <select
+                                    id="issue_category"
+                                    name="issue_category"
+                                    value={formData.issue_category}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">-- Select Category --</option>
+                                    {issueCategories.map(cat => (
+                                        <option key={cat} value={cat}>{cat}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-                        <div className="form-group">
-                            <label htmlFor="issue_description">Describe the problem</label>
-                            <textarea
-                                id="issue_description"
-                                name="issue_description"
-                                placeholder="Tell us what needs to be fixed..."
-                                value={formData.issue_description}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="form-group">
+                                <label htmlFor="issue_description">Describe the problem</label>
+                                <textarea
+                                    id="issue_description"
+                                    name="issue_description"
+                                    placeholder="Tell us what needs to be fixed..."
+                                    value={formData.issue_description}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="form-footer">
-                            {isLoggedIn ? (
+                            <div className="form-footer">
                                 <div className="btn-group">
                                     <button type="submit" className="btn-primary" disabled={loading}>
                                         {loading ? 'Submitting...' : (
@@ -234,28 +261,9 @@ const RaiseComplaint = () => {
                                         Logout
                                     </button>
                                 </div>
-                            ) : (
-                                <div className="btn-group">
-                                    <button
-                                        type="button"
-                                        className="btn-secondary"
-                                        onClick={() => setAuthModal({ isOpen: true, mode: 'login' })}
-                                    >
-                                        <LogIn size={18} />
-                                        LOGIN
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn-primary"
-                                        onClick={() => setAuthModal({ isOpen: true, mode: 'register' })}
-                                    >
-                                        <UserPlus size={18} />
-                                        REGISTER
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </form>
+                            </div>
+                        </form>
+                    )}
                 </div>
             </div>
 
